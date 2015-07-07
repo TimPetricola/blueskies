@@ -1,0 +1,19 @@
+Blue Skies
+<%= digest.created_at.strftime("%B %d#{ordinal(digest.created_at.day)}, %Y") %>
+
+View in you browser <%= browser_url %>.
+
+<% links.each do |link| %>
+### <%= link.title %>
+
+<%= link.url %>
+
+
+<%= link.description_sanitized %>
+
+
+<% end %>
+<% if unsubscribe_url %>
+
+Unsubscribe <%= unsubscribe_url %>
+<% end %>

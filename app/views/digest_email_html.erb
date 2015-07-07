@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="viewport" content="width=device-width" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Blue Skies</title>
+<link rel="stylesheet" type="text/css" href="<%= asset_path 'email.css' %>" />
+</head>
+
+<body>
+<table class="body-wrap">
+  <tr>
+    <td></td>
+    <td class="container" width="600">
+      <div class="content">
+        <table width="100%" cellpadding="0" cellspacing="0">
+          <tr class='header'>
+            <td><a href="<%= ENV['DOMAIN'] %>">Blue Skies</a></td>
+            <td class='alignright'>
+              <%= digest.created_at.strftime("%B %d#{ordinal(digest.created_at.day)}, %Y") %>
+            </td>
+          </tr>
+        </table>
+        <table class="main" width="100%" cellpadding="0" cellspacing="0">
+          <tr>
+            <td class="content-wrap">
+              <table width="100%" cellpadding="0" cellspacing="0">
+                <% links.each do |link| %>
+                  <tr>
+                    <td class="content-block">
+                      <h2>
+                        <a href="<%= link.url %>"><%= link.title %></a>
+                      </h2>
+
+                      <% if link.image && link.image.bigger?(ratio: 1, width: 666, height: 400) %>
+                        <% image = link.image.resized(width: 600, height: 267) %>
+                        <p class="image">
+                          <a href="<%= link.url %>">
+                            <img
+                              src="<%= image.url %>"
+                              width="<%= image.width %>"
+                              height="<%= image.height %>"
+                              style="background-color: #<%= image.color %>"
+                              alt="<%= link.title %>" />
+                          </a>
+                        </p>
+                      <% end %>
+
+                      <% unless link.description_sanitized.empty? %>
+                        <p class="description">
+                          <a href="<%= link.url %>"><%= link.description_sanitized %></a>
+                        </p>
+                      <% end %>
+                    </td>
+                  </tr>
+                <% end %>
+              </table>
+            </td>
+          </tr>
+        </table>
+        <div class="footer">
+          <table width="100%">
+            <tr>
+              <td class="aligncenter content-block">
+                <p>
+                  <a href="<%= browser_url %>">View in your browser</a>
+                </p>
+                <% if unsubscribe_url %>
+                  <p>
+                    You received this email because you subscribed via the <a href="<%= ENV['DOMAIN'] %>">Blue Skies</a> website.<br />
+                    We’ll be sorry to see you go but you can <a href="<%= unsubscribe_url %>">unsubscribe instantly</a>.
+                  </p>
+                <% end %>
+              </td>
+            </tr>
+          </table>
+        </div></div>
+    </td>
+    <td></td>
+  </tr>
+</table>
+
+</body>
+</html>

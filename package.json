@@ -1,0 +1,28 @@
+{
+  "name": "blueskies",
+  "version": "0.0.0",
+  "description": "",
+  "directories": {},
+  "dependencies": {},
+  "devDependencies": {
+    "cssnext": "^1.7.1",
+    "del": "^1.2.0",
+    "gulp": "^3.9.0",
+    "gulp-babel": "^5.1.0",
+    "gulp-cssnext": "^1.0.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-rev": "^5.0.1",
+    "normalize.css": "^3.0.3",
+    "run-sequence": "^1.1.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TimPetricola/blueskies.git"
+  },
+  "author": "Tim Petricola",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TimPetricola/blueskies/issues"
+  },
+  "homepage": "http://blueskies.io"
+}

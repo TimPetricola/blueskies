@@ -1,0 +1,228 @@
+:root {
+  --grey: #2d3234;
+  --light-grey: color(var(--grey) whiteness(+20%));
+  --blue: #219ac2;
+  --text-color: #fff;
+  --font: 'Lato', "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+  --fs21: 1.3125rem;
+  --fs28: 1.75rem;
+  --fs37: 2.3125rem;
+}
+
+@import "../../node_modules/normalize.css/normalize.css";
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background-color: var(--grey);
+  color: var(--text-color);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2 {
+  font-weight: normal;
+}
+
+a {
+  color: #fff;
+  text-decoration: none;
+  border-bottom: 2px solid color(var(--text-color) a(20%));
+  transition: .2s border-color;
+}
+a:hover {
+  border-color: color(var(--text-color) a(60%));
+}
+
+input[type=email] {
+  background-color: var(--text-color);
+  color: var(--grey);
+  padding: 16px 21px;
+  border: 3px solid transparent;
+  width: 300px;
+  transition: .2s border-color;
+}
+
+input[type=email]:focus {
+  outline: 0;
+  border-color: var(--blue);
+}
+
+.btn {
+  background-color: var(--blue);
+  color: var(--text-color);
+  border: 0;
+  padding: 16px 50px;
+}
+
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.page-head {
+  height: 200px;
+  position: relative;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 80px;
+}
+
+.page-head-background {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.page-head-background:after {
+  content: '';
+  display: block;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background: linear-gradient(to bottom, rgba(45, 50, 52, 0) 0%, rgba(45, 50, 52, 1) 100%);
+}
+
+.page-head .container {
+  z-index: 2;
+}
+
+.page-head-title {
+  font-size: var(--fs37);
+  font-weight: bold;
+}
+
+.page-head-subtitle {
+  font-size: var(--fs21);
+  opacity: .9;
+}
+
+.page-foot ul {
+  list-style-type: none;
+  padding: 0;
+  text-align: center;
+  color: color(var(--text-color) a(50%));
+}
+
+.page-foot li {
+  margin-top: 3px;
+}
+
+@media(min-width: 560px) {
+  .page-foot li {
+    display: inline-block;
+  }
+
+  .page-foot li + li {
+    margin-left: 10px;
+  }
+
+  .page-foot li + li:before {
+    content: "\2022";
+    display: inline-block;
+    margin-right: 10px;
+    color: color(var(--text-color) a(20%));
+  }
+}
+
+.digest-section {
+  margin-bottom: 120px;
+  text-align: center;
+}
+
+.section-title {
+  font-size: var(--fs28);
+  margin-bottom: 16px;
+}
+
+.section-introduction {
+  margin-top: 0;
+  font-size: var(--fs21);
+  color: color(var(--text-color) a(50%));
+}
+
+.interests-list {
+  list-style-type: none;
+  padding: 0;
+  text-align: center;
+}
+
+.interests-list > li {
+  display: inline-block;
+  margin: 12px;
+}
+
+.interests-list input {
+  position: absolute;
+  left: -9999px;
+}
+
+.interest-box {
+  display: block;
+  height: 150px;
+  width: 150px;
+  border: 4px solid var(--light-grey);
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+  border-radius: 2px;
+  transition: .2s border-color;
+}
+
+[type=checkbox]:focus + .interest-box {
+  border-color: color(var(--blue) a(50%));
+}
+
+@custom-selector :--interest-box-checked [type=checkbox]:checked + .interest-box;
+:--interest-box-checked {
+  border-color: var(--blue);
+}
+
+.interest-box .checkmark {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  top: 0;
+  right: 0;
+  padding: 6px;
+  border-bottom-left-radius: 2px;
+  transition: .2s background-color;
+}
+
+:--interest-box-checked .checkmark {
+  background-color: var(--blue);
+}
+
+.interest-box .checkmark-icon {
+  margin-top: -2px;
+  margin-right: -2px;
+}
+
+.interest-box .checkmark-icon path {
+  fill: var(--light-grey);
+  transition: .2s fill;
+}
+
+:--interest-box-checked .checkmark-icon path {
+  fill: #fff;
+  opacity: 1;
+}
+
+.interest-box .checkmark-check {
+  opacity: 0;
+}
