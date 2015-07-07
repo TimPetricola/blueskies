@@ -62,7 +62,8 @@ describe 'Interest' do
       from.merge_into(to)
 
       assert_equal [link_to, link_from].to_set, to.links.to_set
-      assert_equal [to], link_from.reload.interests
+      assert_equal 1, link_from.reload.interests.count
+      assert_equal to.id, link_from.reload.interests.first.id
     end
 
     it 'migrates recipients' do
@@ -74,7 +75,8 @@ describe 'Interest' do
       from.merge_into(to)
 
       assert_equal [recipient_to, recipient_from].to_set, to.recipients.to_set
-      assert_equal [to], recipient_from.reload.interests
+      assert_equal 1, recipient_from.reload.interests.count
+      assert_equal to.id, recipient_from.reload.interests.first.id
     end
   end
 end

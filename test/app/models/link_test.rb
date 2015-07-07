@@ -10,8 +10,8 @@ describe 'Link' do
     let(:recipient) { BlueSkies::Models::Recipient.create(email: 'tim@blueskies.io')}
     let(:curator_1) { BlueSkies::Models::Curator.create(facebook_identifier: 'foo')}
     let(:curator_2) { BlueSkies::Models::Curator.create(facebook_identifier: 'bar')}
-    let(:link_1) { model.create(url: 'http://blueskies.io/1', last_curated_at: now, created_at: now, extracted_at: now, created_at: now - 1)}
-    let(:link_2) { model.create(url: 'http://blueskies.io/2', last_curated_at: now, created_at: now, extracted_at: now, created_at: now)}
+    let(:link_1) { model.create(url: 'http://blueskies.io/1', last_curated_at: now, extracted_at: now, created_at: now - 1)}
+    let(:link_2) { model.create(url: 'http://blueskies.io/2', last_curated_at: now, extracted_at: now, created_at: now)}
 
     describe 'included' do
       describe 'without common interest' do
@@ -77,7 +77,10 @@ describe 'Link' do
         link_1.update(created_at: now - 60 * 60 * 24 * 10)
         link_2.update(created_at: now - 60 * 60 * 24 * 1)
 
-        assert_equal [link_2, link_1], model.ranked_for_recipient(recipient)
+        ranked = model.ranked_for_recipient(recipient)
+
+        assert_equal link_2.id, ranked[0].id
+        assert_equal link_1.id, ranked[1].id
       end
 
       it 'has links with most interest in common first' do
@@ -91,7 +94,10 @@ describe 'Link' do
         link_2.add_curator(curator_1)
         link_2.reload
 
-        assert_equal [link_1, link_2], model.ranked_for_recipient(recipient)
+        ranked = model.ranked_for_recipient(recipient)
+
+        assert_equal link_1.id, ranked[0].id
+        assert_equal link_2.id, ranked[1].id
       end
 
       it 'has links with most curators first' do
@@ -104,7 +110,10 @@ describe 'Link' do
         link_2.add_curator(curator_2)
         link_2.reload
 
-        assert_equal [link_1, link_2], model.ranked_for_recipient(recipient)
+        ranked = model.ranked_for_recipient(recipient)
+
+        assert_equal link_1.id, ranked[0].id
+        assert_equal link_2.id, ranked[1].id
       end
 
       it 'has links with most shares first' do
@@ -119,7 +128,10 @@ describe 'Link' do
         link_1.update(share_count: 100)
         link_2.update(share_count: 1000)
 
-        assert_equal [link_2, link_1], model.ranked_for_recipient(recipient)
+        ranked = model.ranked_for_recipient(recipient)
+
+        assert_equal link_2.id, ranked[0].id
+        assert_equal link_1.id, ranked[1].id
       end
     end
   end
@@ -162,10 +174,9 @@ describe 'Link' do
   describe '#image=' do
     it 'saves image data' do
       record = model.create(url: 'http://blueskies.io')
-      record.update_all(image: {foo: 'bar'})
+      record.update_all(image: {url: 'http://blueskies.io/foo.jpg'})
 
-      record.reload
-      assert_equal record.image['foo'], 'bar'
+      assert_equal 'http://blueskies.io/foo.jpg', record.reload.image.url
     end
   end
 end
