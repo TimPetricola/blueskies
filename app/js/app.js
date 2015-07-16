@@ -1,5 +1,3 @@
-particlesJS('particles');
-
 const util = (() => {
   const nodeArray = (nodeList) => [].slice.call(nodeList);
 
@@ -38,3 +36,34 @@ const Form = ((util) => {
 
   updateSampleLink();
 })(util);
+
+const InterestsSpinner = (() => {
+  const spinner = document.querySelector('.js-interest-spinner');
+
+  const current = document.querySelector('.js-interest-spinner-current');
+  const next = document.querySelector('.js-interest-spinner-next');
+  const words = spinner.getAttribute('data-words').split(',');
+
+  let index = 0;
+  let nextIndex = 1;
+
+  next.textContent = words[nextIndex];
+  spinner.style.width = `${current.offsetWidth}px`;
+
+  const spin = (first) => {
+    index = nextIndex;
+    nextIndex++;
+
+    if(nextIndex >= words.length) {
+      nextIndex = 0;
+    }
+
+    spinner.style.width = `${next.offsetWidth}px`;
+
+    current.textContent = words[index];
+    next.textContent = words[nextIndex];
+  };
+
+  setInterval(spin, 3000);
+})();
+

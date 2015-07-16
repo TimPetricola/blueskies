@@ -1,9 +1,13 @@
+require 'sinatra/content_for'
+
 module BlueSkies
   module Routes
     class Base < Sinatra::Base
       configure do
         set :views, 'app/views'
       end
+
+      helpers Sinatra::ContentFor
 
       helpers do
         def asset_path(asset)
@@ -22,6 +26,17 @@ module BlueSkies
               when 3; "rd"
               else    "th"
             end
+          end
+        end
+
+        def interest_image(interest)
+          @interests_images ||= {}
+          @interests_images[interest.id] ||= begin
+            interest.stems
+              .map { |s| Dir.glob("./public/interests/#{s}/*.jpg") }
+              .flatten
+              .map { |path| path.gsub('./public', '') }
+              .sample
           end
         end
       end

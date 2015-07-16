@@ -4,6 +4,7 @@ ruby '2.2.2'
 
 gem 'rake', '~> 10.4.2'
 gem 'sinatra', '~> 1.4.6'
+gem 'sinatra-contrib', '~> 1.4.6'
 gem 'json', '~> 1.8.1'
 gem 'i18n', '~> 0.7.0'
 gem 'ruby-stemmer', '~> 0.9.6', require: 'lingua/stemmer'

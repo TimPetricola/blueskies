@@ -20,27 +20,33 @@
 </head>
 <body>
   <header class="page-head">
-    <div class="page-head-background" id="particles"></div>
     <div class="container">
-      <h1 class="page-head-title">Blue Skies</h1>
-      <h2 class="page-head-subtitle">
-        Your personnalized air sports digest.<br>
-        Paragliding, BASE, skydiving, ... straight in your inbox.
-      </h2>
+      <h1 class="page-head-title">
+        <a href="/">blueskies</a>
+      </h1>
+
+      <% if content_for?(:headline) %>
+        <h2 class="page-head-subtitle">
+          <%= yield_content(:headline) %>
+        </h2>
+      <% end %>
     </div>
   </header>
 
-  <%= yield %>
+  <div class="main">
+    <%= yield %>
 
-  <footer class="page-foot">
-    <ul>
-      <li>Handcrafted by <a href="http://timpetricola.com">Tim Petricola</a></li>
-      <li><a href="mailto:tim.petricola@gmail.com">Say Hi</a></li>
-      <li><a href="https://github.com/TimPetricola/blueskies">Source code</a></li>
-    </ul>
-  </footer>
+    <footer class="page-foot">
+      <div class="container">
+        <ul>
+          <li>Handcrafted by <a href="http://timpetricola.com">Tim Petricola</a></li>
+          <li><a href="mailto:tim.petricola@gmail.com">Say Hi</a></li>
+          <li><a href="https://github.com/TimPetricola/blueskies">Source code</a></li>
+        </ul>
+      </div>
+    </footer>
+  </div>
 
-  <script src="<%= asset_path 'particles.js' %>"></script>
   <script src="<%= asset_path 'app.js' %>"></script>
 
   <% if ENV['GA_ID'] %>

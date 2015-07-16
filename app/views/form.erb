@@ -1,18 +1,31 @@
+<% content_for(:headline) do %>
+  <span class="interest-spinner js-interest-spinner" data-words="<%=
+      interests.to_a.map(&:name).join(',')
+    %>">
+    <span class="current js-interest-spinner-current">
+      <%= interests.to_a[0].name %>
+    </span>
+    <span class="next">
+      <span class="js-interest-spinner-next"></span>
+    </span>
+  </span> email digest.<br>
+<% end %>
+
 <form action="/subscriptions" method="post">
-  <% unless form.errors.empty?  %>
-    <section class="digest-section">
-      <% if form.errors[:interests] %>
-        <p>Please choose at least one interest.</p>
-      <% end %>
-
-      <% if form.errors[:email] %>
-        <p>Please enter a valid email address.</p>
-      <% end %>
-    </section>
-  <% end %>
-
   <section class="digest-section section-interests">
     <div class="container">
+      <% unless form.errors.empty?  %>
+        <section class="digest-section">
+          <% if form.errors[:interests] %>
+            <p>Please choose at least one interest.</p>
+          <% end %>
+
+          <% if form.errors[:email] %>
+            <p>Please enter a valid email address.</p>
+          <% end %>
+        </section>
+      <% end %>
+
       <h2 class="section-title">What are you interested in?</h2>
       <p class="section-introduction">
         Choose your favorite sports.
@@ -23,8 +36,13 @@
           <li>
             <label>
               <input type="checkbox" name="interests[]" value="<%= interest.id %>"<%= form.interest_checked?(interest) ? ' checked' : '' %> class="js-interest-input">
-              <div class="interest-box">
-                <%= interest.name %>
+              <div
+                class="interest-box"
+                <% if interest_image(interest) %>
+                  style="background-image: url(<%= interest_image(interest) %>);"
+                <% end %>
+                >
+                <span><%= interest.name %></span>
                 <span class="checkmark">
                   <svg class="checkmark-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 100 125">
                     <path class="checkmark-check" d="M68.604,36.099L43.513,61.19L32.396,50.073c-0.781-0.781-2.048-0.781-2.828,0  c-0.781,0.781-0.781,2.047,0,2.828l12.531,12.532c0.375,0.375,0.884,0.585,1.414,0.585s1.039-0.21,1.414-0.585l26.506-26.506  c0.781-0.781,0.781-2.047,0-2.828S69.385,35.317,68.604,36.099z"/>
@@ -51,7 +69,7 @@
       <p class="section-introduction">
         No spam. Ever. Unsubscribe at any time
       </p>
-      <input type="email" name="email" placeholder="tim@blueskies.io" value="<%= form.email %>">
+      <input type="email" name="email" placeholder="Your email" value="<%= form.email %>">
     </div>
   </section>
 

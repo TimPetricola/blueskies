@@ -1,7 +1,5 @@
 'use strict';
 
-particlesJS('particles');
-
 var util = (function () {
   var nodeArray = function nodeArray(nodeList) {
     return [].slice.call(nodeList);
@@ -46,3 +44,33 @@ var Form = (function (util) {
 
   updateSampleLink();
 })(util);
+
+var InterestsSpinner = (function () {
+  var spinner = document.querySelector('.js-interest-spinner');
+
+  var current = document.querySelector('.js-interest-spinner-current');
+  var next = document.querySelector('.js-interest-spinner-next');
+  var words = spinner.getAttribute('data-words').split(',');
+
+  var index = 0;
+  var nextIndex = 1;
+
+  next.textContent = words[nextIndex];
+  spinner.style.width = current.offsetWidth + 'px';
+
+  var spin = function spin(first) {
+    index = nextIndex;
+    nextIndex++;
+
+    if (nextIndex >= words.length) {
+      nextIndex = 0;
+    }
+
+    spinner.style.width = next.offsetWidth + 'px';
+
+    current.textContent = words[index];
+    next.textContent = words[nextIndex];
+  };
+
+  setInterval(spin, 3000);
+})();

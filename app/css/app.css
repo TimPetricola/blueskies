@@ -1,10 +1,12 @@
 :root {
-  --grey: #2d3234;
-  --light-grey: color(var(--grey) whiteness(+20%));
+  --grey: #3e4345;
+  --light-grey: color(var(--grey) whiteness(+40%));
   --blue: #219ac2;
-  --text-color: #fff;
+  --text-color: var(--grey);
+  --bg-color: #fff;
   --font: 'Lato', "Helvetica Neue", Helvetica, Arial, sans-serif;
 
+  --fs16: 1rem;
   --fs21: 1.3125rem;
   --fs28: 1.75rem;
   --fs37: 2.3125rem;
@@ -20,7 +22,7 @@
 
 body {
   font-family: var(--font);
-  background-color: var(--grey);
+  background-color: var(--bg-color);
   color: var(--text-color);
   -webkit-font-smoothing: antialiased;
 }
@@ -31,7 +33,7 @@ h2 {
 }
 
 a {
-  color: #fff;
+  color: var(--text-color);
   text-decoration: none;
   border-bottom: 2px solid color(var(--text-color) a(20%));
   transition: .2s border-color;
@@ -41,11 +43,11 @@ a:hover {
 }
 
 input[type=email] {
-  background-color: var(--text-color);
-  color: var(--grey);
+  background-color: #fff;
+  color: var(--text-color);
   padding: 16px 21px;
-  border: 3px solid transparent;
-  width: 300px;
+  border: 3px solid var(--light-grey);
+  width: 100%;
   transition: .2s border-color;
 }
 
@@ -56,9 +58,10 @@ input[type=email]:focus {
 
 .btn {
   background-color: var(--blue);
-  color: var(--text-color);
+  color: #fff;
   border: 0;
   padding: 16px 50px;
+  width: 100%;
 }
 
 .container {
@@ -68,52 +71,42 @@ input[type=email]:focus {
 }
 
 .page-head {
-  height: 200px;
-  position: relative;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 80px;
-}
-
-.page-head-background {
-  height: 100%;
-  width: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-.page-head-background:after {
-  content: '';
-  display: block;
-  position: absolute;
-  height: 100%;
+  background-color: var(--blue);
+  position: fixed;
+  padding: 20px 0;
+  color: #fff;
   width: 100%;
   top: 0;
-  left: 0;
-  background: linear-gradient(to bottom, rgba(45, 50, 52, 0) 0%, rgba(45, 50, 52, 1) 100%);
-}
-
-.page-head .container {
-  z-index: 2;
+  z-index: 10;
 }
 
 .page-head-title {
-  font-size: var(--fs37);
+  font-size: var(--fs28);
   font-weight: bold;
+  margin: 0;
+  display: inline;
+}
+
+.page-head-title > a {
+  color: inherit;
+  border: 0;
 }
 
 .page-head-subtitle {
-  font-size: var(--fs21);
+  font-size: var(--fs16);
   opacity: .9;
+  margin-bottom: 0;
+  display: inline;
+  margin-left: 10px;
+}
+
+.main {
+  padding-top: 120px;
 }
 
 .page-foot ul {
   list-style-type: none;
   padding: 0;
-  text-align: center;
   color: color(var(--text-color) a(50%));
 }
 
@@ -139,30 +132,29 @@ input[type=email]:focus {
 }
 
 .digest-section {
-  margin-bottom: 120px;
-  text-align: center;
+  margin-bottom: 80px;
 }
 
 .section-title {
   font-size: var(--fs28);
-  margin-bottom: 16px;
+  margin-bottom: 0.2rem;
 }
 
 .section-introduction {
   margin-top: 0;
   font-size: var(--fs21);
   color: color(var(--text-color) a(50%));
+  margin-bottom: 1.5rem;
 }
 
 .interests-list {
   list-style-type: none;
   padding: 0;
-  text-align: center;
 }
 
 .interests-list > li {
   display: inline-block;
-  margin: 12px;
+  margin-right: 24px;
 }
 
 .interests-list input {
@@ -177,11 +169,33 @@ input[type=email]:focus {
   border: 4px solid var(--light-grey);
   cursor: pointer;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   flex-direction: column;
   position: relative;
   border-radius: 2px;
   transition: .2s border-color;
+  text-align: center;
+  background-color: var(--grey);
+  background-position: center center;
+  background-size: cover;
+  padding: 10px;
+  color: #fff;
+}
+
+.interest-box:after {
+  content: '';
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background-image: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+}
+
+.interest-box > span {
+  position: relative;
+  z-index: 1;
 }
 
 [type=checkbox]:focus + .interest-box {
@@ -224,5 +238,26 @@ input[type=email]:focus {
 }
 
 .interest-box .checkmark-check {
+  opacity: 0;
+}
+
+.interest-spinner {
+  display: inline-block;
+  transition: .4s width ease-out;
+  position: relative;
+}
+
+.interest-spinner > .current {
+  white-space: nowrap;
+}
+
+.interest-spinner > .next {
+  position: absolute;
+  pointer-events: none;
+  top: 0;
+  left: 50%;
+  width: 500px;
+  margin-left: -250px;
+  white-space: nowrap;
   opacity: 0;
 }

@@ -3,4 +3,3 @@ languages:
   JavaScript: true
 exclude_paths:
 - "public/assets/*"
-- "app/js/particles.js"
