@@ -48,3 +48,12 @@ namespace :db do
     `pg_dump --schema-only #{database.url} > db/schema.sql`
   end
 end
+
+namespace :curator do
+  task :add, [:facebook_identifier] => :app do |t, args|
+    identifier = args[:facebook_identifier]
+    return unless identifier
+    BlueSkies::Models::Curator.find_or_create(facebook_identifier: identifier)
+    puts "Curator #{identifier} added."
+  end
+end

@@ -58,3 +58,13 @@ foreman run worker
 createdb blueskies_test
 rake db:test
 ```
+
+## Tasks
+
+### Adding a curator
+
+To add a curator named `blueskies` on Facebook:
+
+```
+rake curator:add[blueskies]
+```
