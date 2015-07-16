@@ -180,6 +180,7 @@ input[type=email]:focus {
   background-size: cover;
   padding: 10px;
   color: #fff;
+  margin-bottom: 24px;
 }
 
 .interest-box:after {
