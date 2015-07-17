@@ -18,7 +18,7 @@ module BlueSkies
         now = Time.now
 
         recipient.update_schedule(
-          week_days:[:sunday],
+          week_days: form.biweekly? ? [:wednesday, :sunday] : [:sunday],
           time: Time.new(now.year, now.month, now.day, 9, 0, 0, form.timezone * 3600).utc
         )
 

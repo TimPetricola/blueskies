@@ -32,11 +32,13 @@ h2 {
   font-weight: normal;
 }
 
-a {
+a,
+.link {
   color: var(--text-color);
   text-decoration: none;
   border-bottom: 2px solid color(var(--text-color) a(20%));
   transition: .2s border-color;
+  cursor: pointer;
 }
 a:hover {
   border-color: color(var(--text-color) a(60%));
@@ -261,4 +263,21 @@ input[type=email]:focus {
   margin-left: -250px;
   white-space: nowrap;
   opacity: 0;
+}
+
+#schedule-biweekly {
+  position: absolute;
+  left: -9999px;
+}
+
+#schedule-biweekly ~ .biweekly-schedule-label {
+  display: none;
+}
+
+#schedule-biweekly:checked ~ .biweekly-schedule-label {
+  display: inline;
+}
+
+#schedule-biweekly:checked ~ .weekly-schedule-label {
+  display: none;
 }

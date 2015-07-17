@@ -70,6 +70,22 @@
         No spam. Ever. Unsubscribe at any time
       </p>
       <input type="email" name="email" placeholder="Your email" value="<%= form.email %>">
+      </p>
+    </div>
+  </section>
+
+  <section class="digest-section section-email">
+    <div class="container">
+      <h2 class="section-title">How often do you want to get it?</h2>
+      <p class="section-introduction">
+        Weekly? Biweekly?
+      </p>
+
+      <p>
+        <input id="schedule-biweekly" type="checkbox" name="biweekly" value="">
+        Every <span class="weekly-schedule-label">Sunday</span><span class="biweekly-schedule-label">Wednesday and Sunday</span> at 9AM. <label for="schedule-biweekly" class="link weekly-schedule-label">Change to twice a week</label><label for="schedule-biweekly" class="link biweekly-schedule-label">Change to once a week</label>.<br>
+        Local time is currently <span class="js-local-time-human"></span>.
+      </p>
     </div>
   </section>
 

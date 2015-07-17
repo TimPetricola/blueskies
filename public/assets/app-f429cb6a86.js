@@ -10,6 +10,7 @@ var util = (function () {
 
 var Form = (function (util) {
   var tzInputs = document.querySelectorAll('.js-input-timezone');
+  var localTimeLabel = document.querySelectorAll('.js-local-time-human');
   var interestsInputs = document.querySelectorAll('.js-interest-input');
   var sampleLink = document.querySelector('.js-sample-link');
   var samplePath = sampleLink.href;
@@ -34,8 +35,22 @@ var Form = (function (util) {
     sampleLink.href = href;
   };
 
+  var dateToHumanTime = function dateToHumanTime(date) {
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var period = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12;
+    hours = hours ? hours : 12;
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+    return hours + ':' + minutes + period;
+  };
+
   util.nodeArray(tzInputs).forEach(function (input) {
     input.value = new Date().getTimezoneOffset() / 60;
+  });
+
+  util.nodeArray(localTimeLabel).forEach(function (node) {
+    node.innerText = dateToHumanTime(new Date());
   });
 
   util.nodeArray(interestsInputs).forEach(function (input) {

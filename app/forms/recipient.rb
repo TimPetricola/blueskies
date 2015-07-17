@@ -24,6 +24,10 @@ module BlueSkies
         params[:email]
       end
 
+      def biweekly?
+        !params[:biweekly].nil?
+      end
+
       def valid?
         errors[:interests] = :blank if interests_ids.empty?
         errors[:email] = :blank if email.nil? || email.empty?
