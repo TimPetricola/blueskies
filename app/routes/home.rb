@@ -29,6 +29,8 @@ module BlueSkies
           recipient.add_interest(interest)
         end
 
+        Workers::NewRecipientNotify.perform_async(recipient.id)
+
         erb :subscribe_confirm, locals: {
           recipient: recipient,
           next_digest_at: recipient.schedule.next_occurrence.to_time

@@ -4,6 +4,7 @@ module BlueSkies
     autoload :Digest,         'workers/digest'
     autoload :LinkExtract,    'workers/link_extract'
     autoload :LinkShareCount, 'workers/link_share_count'
+    autoload :NewRecipientNotify, 'workers/new_recipient_notify'
   end
 end
 
