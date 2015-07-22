@@ -3,7 +3,7 @@
   --light-grey: color(var(--grey) whiteness(+40%));
   --blue: #219ac2;
   --text-color: var(--grey);
-  --bg-color: #fff;
+  --bg-color: #fcfcfc;
   --font: 'Lato', "Helvetica Neue", Helvetica, Arial, sans-serif;
 
   --fs16: 1rem;
@@ -73,10 +73,11 @@ input[type=email]:focus {
 }
 
 .page-head {
-  background-color: var(--blue);
+  background-color: #fff;
+  border-bottom: 1px solid color(var(--bg-color) shade(5%));
+  color: var(--light-grey);
   position: fixed;
   padding: 20px 0;
-  color: #fff;
   width: 100%;
   top: 0;
   z-index: 10;
@@ -84,6 +85,7 @@ input[type=email]:focus {
 
 .page-head-title {
   font-size: var(--fs28);
+  color: var(--blue);
   font-weight: bold;
   margin: 0;
   display: inline;
