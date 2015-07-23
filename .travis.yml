@@ -3,3 +3,4 @@ addons:
   postgresql: "9.4"
 before_script:
 - psql -c 'create database blueskies_test;' -U postgres
+- psql blueskies_test -c 'CREATE EXTENSION IF NOT EXISTS hstore' -U postgres
