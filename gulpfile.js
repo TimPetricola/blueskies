@@ -11,7 +11,7 @@ gulp.task('clean', function(cb) {
     './tmp',
     './public/assets',
   ], cb);
-})
+});
 
 gulp.task('css', function() {
   return gulp

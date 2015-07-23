@@ -13,7 +13,7 @@ const Form = ((util) => {
 
   const selectedInterests = () => {
     const selected = document.querySelectorAll('.js-interest-input:checked');
-    return util.nodeArray(selected).map((s) => s.value)
+    return util.nodeArray(selected).map((s) => s.value);
   };
 
   const updateSampleLink = () => {
