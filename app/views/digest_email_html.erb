@@ -15,9 +15,9 @@
       <div class="content">
         <table width="100%" cellpadding="0" cellspacing="0">
           <tr class='header'>
-            <td><a href="<%= ENV['DOMAIN'] %>">Blue Skies</a></td>
+            <td><a href="<%= ENV['DOMAIN'] %>" class="logo">blueskies</a></td>
             <td class='alignright'>
-              <%= digest.created_at.strftime("%B %d#{ordinal(digest.created_at.day)}, %Y") %>
+              <%= digest.created_at.strftime("%B %-d#{ordinal(digest.created_at.day)}, %Y") %>
             </td>
           </tr>
         </table>
