@@ -23,7 +23,9 @@ gulp.task('css', function() {
 gulp.task('js', function() {
   return gulp
     .src('./app/js/**/*.js')
-    .pipe(babel())
+    .pipe(babel({
+      presets: ['es2015']
+    }))
     .pipe(gulp.dest('./tmp/assets'));
 });
 
