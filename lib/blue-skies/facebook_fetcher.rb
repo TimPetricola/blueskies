@@ -1,5 +1,7 @@
 module BlueSkies
   module FacebookFetcher
+    UnexistingPageError = Class.new(StandardError)
+
     extend self
 
     WEEK = 60 * 60 * 24 * 7
@@ -21,6 +23,8 @@ module BlueSkies
         since: since.to_i
       }
       Nestful.get(url, params).decoded
+    rescue Nestful::ResourceNotFound => e
+      raise UnexistingPageError.new("#{page} does not exist")
     end
 
     def urls_from_raw_links(raw)
