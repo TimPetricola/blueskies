@@ -71,7 +71,7 @@ module BlueSkies
         end
 
         digest = Models::Digest.new(created_at: Time.now)
-        links = Models::Link.ranked(interests: interests_ids)
+        links = Models::Link.ranked(interests: interests_ids).all
         digest.links.concat(links)
 
         delivery = Delivery.new(digest, sample: true, unsubscribe: false)
