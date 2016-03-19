@@ -25,6 +25,8 @@ gem 'sequel', '~> 4.23.0'
 gem 'sinatra-sequel', '~> 0.9.0'
 gem 'pg', '~> 0.18.2'
 
+gem 'newrelic_rpm', '~> 3.15.0.314'
+
 group :test do
   gem 'webmock', '~> 1.21.0'
   gem 'minitest-reporters'
