@@ -30,6 +30,10 @@ module BlueSkies
         )
       end
 
+      def showable?
+        bigger?(ratio: 1, width: 666, height: 400)
+      end
+
       private
 
       def resized_url(width:, height:)

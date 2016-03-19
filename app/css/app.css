@@ -28,13 +28,15 @@ body {
 }
 
 h1,
-h2 {
+h2,
+h3 {
   font-weight: normal;
+  margin-top: 0
 }
 
 a,
 .link {
-  color: var(--text-color);
+  color: inherit;
   text-decoration: none;
   border-bottom: 2px solid color(var(--text-color) a(20%));
   transition: .2s border-color;
@@ -76,11 +78,9 @@ input[type=email]:focus {
   background-color: #fff;
   border-bottom: 1px solid color(var(--bg-color) shade(5%));
   color: var(--light-grey);
-  position: fixed;
-  padding: 20px 0;
+  padding: 20px 0 20px 40px;
   width: 100%;
   top: 0;
-  z-index: 10;
 }
 
 .page-head-title {
@@ -102,10 +102,6 @@ input[type=email]:focus {
   margin-bottom: 0;
   display: inline;
   margin-left: 10px;
-}
-
-.main {
-  padding-top: 120px;
 }
 
 .page-foot ul {
@@ -136,7 +132,7 @@ input[type=email]:focus {
 }
 
 .digest-section {
-  margin-bottom: 80px;
+  margin-bottom: 40px;
 }
 
 .section-title {
@@ -147,7 +143,7 @@ input[type=email]:focus {
 .section-introduction {
   margin-top: 0;
   font-size: var(--fs21);
-  color: color(var(--text-color) a(50%));
+  color: color(#fff a(50%));
   margin-bottom: 1.5rem;
 }
 
@@ -185,6 +181,7 @@ input[type=email]:focus {
   padding: 10px;
   color: #fff;
   margin-bottom: 24px;
+  user-select: none;
 }
 
 .interest-box:after {
@@ -282,4 +279,34 @@ input[type=email]:focus {
 
 #schedule-biweekly:checked ~ .weekly-schedule-label {
   display: none;
+}
+
+.main-column {
+  padding: 20px;
+}
+
+@media(min-width: 875px) {
+  .columns {
+    display: flex;
+  }
+
+  .main-column {
+    width: 50%;
+    padding: 40px;
+  }
+}
+
+.form-column {
+  background-color: var(--grey);
+  color: #fff;
+}
+
+.links-list {
+  padding: 0;
+  list-style: none;
+}
+
+.links-list img {
+  max-width: 100%;
+  height: auto;
 }

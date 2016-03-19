@@ -20,17 +20,15 @@
 </head>
 <body>
   <header class="page-head">
-    <div class="container">
-      <h1 class="page-head-title">
-        <a href="/">blueskies</a>
-      </h1>
+    <h1 class="page-head-title">
+      <a href="/">blueskies</a>
+    </h1>
 
-      <% if content_for?(:headline) %>
-        <h2 class="page-head-subtitle">
-          <%= yield_content(:headline) %>
-        </h2>
-      <% end %>
-    </div>
+    <% if content_for?(:headline) %>
+      <h2 class="page-head-subtitle">
+        <%= yield_content(:headline) %>
+      </h2>
+    <% end %>
   </header>
 
   <div class="main">

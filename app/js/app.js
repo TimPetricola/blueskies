@@ -1,49 +1,49 @@
-const dateToHuman = (date) => {
-  let hours = date.getHours()
-  let minutes = date.getMinutes()
-  const period = hours >= 12 ? 'PM' : 'AM'
-  hours = hours % 12
-  hours = hours === 0 ? 12 : hours
-  minutes = minutes < 10 ? `0${minutes}` : minutes
-  return `${hours}:${minutes}${period}`
-}
+import Vue from 'vue'
+import dateToHuman from './utils/dateToHuman'
 
 // Form
 const tzInputs = document.querySelectorAll('.js-input-timezone')
-const localTimeLabel = document.querySelectorAll('.js-local-time-human')
 const interestsInputs = document.querySelectorAll('.js-interest-input')
 const sampleLink = document.querySelector('.js-sample-link')
-const samplePath = sampleLink.href
+const linksList = document.querySelector('.js-links-list')
+const samplePath = linksList.getAttribute('data-sample-path')
 
 const selectedInterests = () => {
   const selected = document.querySelectorAll('.js-interest-input:checked')
   return [...selected].map((s) => s.value)
 }
 
-const updateSampleLink = () => {
-  let href = samplePath
+// List
+const linksListView = new Vue({
+  el: '#links-list',
+  data: { links: [], samplePath }
+})
+
+const refreshLinksList = () => {
   const selected = selectedInterests()
+  let queryParams = ''
 
   if (selected.length) {
-    href += '?' + selected.map((id) => 'interests[]=' + id).join('&')
+    queryParams += '?' + selected.map(id => 'interests[]=' + id).join('&')
   }
 
-  sampleLink.href = href
+  linksListView.samplePath = samplePath + queryParams
+
+  fetch(linksList.getAttribute('data-path') + queryParams)
+    .then(response => response.json())
+    .then(json => { linksListView.links = json })
 }
 
 ;[...tzInputs].forEach((input) => {
   input.value = new Date().getTimezoneOffset() / 60
 })
 
-;[...localTimeLabel].forEach((node) => {
-  node.innerText = dateToHuman(new Date())
-})
-
 ;[...interestsInputs].forEach((input) => {
-  input.addEventListener('change', updateSampleLink)
+  input.addEventListener('change', refreshLinksList)
 })
 
-updateSampleLink()
+refreshLinksList()
+
 
 // Interests spinner
 const spinner = document.querySelector('.js-interest-spinner')

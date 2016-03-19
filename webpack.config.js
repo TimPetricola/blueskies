@@ -54,6 +54,10 @@ module.exports = {
         })
         fs.writeFileSync(ASSETS_MANIFEST, JSON.stringify(assets, null, 2))
       });
-    }
+    },
+    new webpack.ProvidePlugin({
+      'Promise': 'es6-promise',
+      'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
+    })
   ]
 }

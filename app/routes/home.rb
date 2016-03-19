@@ -46,6 +46,25 @@ module BlueSkies
         erb :unsubscribe_confirm
       end
 
+      get '/links.json' do
+        interests_ids = params.fetch('interests') do
+          Models::Interest.published.select(:id)
+        end
+
+        links = Models::Link.ranked(interests: interests_ids)
+
+        content_type :json
+        links.map do |link|
+          {
+            id: link.id,
+            title: link.title,
+            url: link.url,
+            description: link.description,
+            image: link.image && link.image.resized(width: 600, height: 267).to_h
+          }
+        end.to_json
+      end
+
       get '/digests/sample' do
         interests_ids = params.fetch('interests') do
           Models::Interest.published.select(:id)
