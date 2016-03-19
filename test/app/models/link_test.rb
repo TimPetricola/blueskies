@@ -77,7 +77,7 @@ describe 'Link' do
         link_1.update(created_at: now - 60 * 60 * 24 * 10)
         link_2.update(created_at: now - 60 * 60 * 24 * 1)
 
-        ranked = model.ranked_for_recipient(recipient)
+        ranked = model.ranked_for_recipient(recipient).all
 
         assert_equal link_2.id, ranked[0].id
         assert_equal link_1.id, ranked[1].id
@@ -94,7 +94,8 @@ describe 'Link' do
         link_2.add_curator(curator_1)
         link_2.reload
 
-        ranked = model.ranked_for_recipient(recipient)
+        puts model.ranked_for_recipient(recipient).sql
+        ranked = model.ranked_for_recipient(recipient).all
 
         assert_equal link_1.id, ranked[0].id
         assert_equal link_2.id, ranked[1].id
@@ -110,7 +111,7 @@ describe 'Link' do
         link_2.add_curator(curator_2)
         link_2.reload
 
-        ranked = model.ranked_for_recipient(recipient)
+        ranked = model.ranked_for_recipient(recipient).all
 
         assert_equal link_1.id, ranked[0].id
         assert_equal link_2.id, ranked[1].id
@@ -128,7 +129,7 @@ describe 'Link' do
         link_1.update(share_count: 100)
         link_2.update(share_count: 1000)
 
-        ranked = model.ranked_for_recipient(recipient)
+        ranked = model.ranked_for_recipient(recipient).all
 
         assert_equal link_2.id, ranked[0].id
         assert_equal link_1.id, ranked[1].id

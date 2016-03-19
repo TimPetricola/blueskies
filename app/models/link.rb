@@ -58,7 +58,7 @@ module BlueSkies
             )
           }
 
-          ds = select(:links__id)
+          ds = select_all(:links)
             .exclude(links__extracted_at: nil)
             .join(:curators_links, link_id: :links__id)
             .group(:links__id)
@@ -91,13 +91,6 @@ module BlueSkies
           ds = ds.select_append do
             Sequel.*(*scoring.map{|s| Sequel.expr(s)}).as(:rank)
           end
-
-          # Get ranked links ids
-          ids = ds.map { |r| r[:id] }
-
-          # # Needs to be reordered as a WHERE id IN (...) does not keep order
-          # # TODO: move this to SQL
-          where(id: ids).to_a.sort_by{ |l| ids.index(l.id) }
         end
       end
 
