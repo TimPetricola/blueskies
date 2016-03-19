@@ -85,7 +85,7 @@
     </form>
   </div>
 
-  <div id="links-list" class="js-links-list main-column" data-path="/links.json" data-sample-path="/digests/sample">
+  <div id="links-list" class="js-links-list main-column" data-path="/links.json" data-sample-path="/digests/sample" v-cloak>
     <div v-if="links.length">
       <ul class="links-list">
         <li v-for="link in links" track-by="id">
